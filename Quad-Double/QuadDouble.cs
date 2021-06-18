@@ -158,5 +158,41 @@ namespace Quad_Double
 
             return Renormalise(q0, q1, q2, q3, q4);
         }
+
+        public static QuadDouble Pow(QuadDouble a, int n)
+        {
+            if (n == 0) return 1.0;
+            bool negative = n < 0;
+            n = System.Math.Abs(n);
+
+            //Find largest power of 2 < b
+            int pow = 1;
+            for (int i = 1; i < n; i *= 2)
+            {
+                pow = i;
+            }
+
+            QuadDouble result = 1.0;
+            for(int i = pow; i >= 1; i /= 2)
+            {
+                result = result * result;
+                if(n >= i)
+                {
+                    n -= i;
+                    result = result * a;
+                }
+            }
+            return negative ? 1 / result : result;
+        }
+
+        public static QuadDouble Root(QuadDouble a, int n)
+        {
+            QuadDouble x0 = System.Math.Pow(a.x0, -1.0 / n);
+            x0 += x0 * (1 - a * Pow(x0, n)) * (1.0 / n);
+            x0 += x0 * (1 - a * Pow(x0, n)) * (1.0 / n);
+            x0 += x0 * (1 - a * Pow(x0, n)) * (1.0 / n);
+            return 1/x0;
+        }
+
     }
 }
