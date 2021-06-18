@@ -14,10 +14,10 @@ namespace Test
         [Test]
         public void Test1()
         {
-            QuadDouble quad1 = new QuadDouble(10);
-            for(double i = 0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000001; i < 1.1; i *= 10)
+            QuadDouble quad1 = new QuadDouble(1);
+            for(QuadDouble i = 0.5; i.x0 > 0.0000000000000000000000000000000000000000000000000001; i *= 0.7)
             {
-                quad1 += new QuadDouble(i);
+                Console.WriteLine($"{i.x0}   {i.x1}   {i.x2}   {i.x3}");
             }
         }
     }
